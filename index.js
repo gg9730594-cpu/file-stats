@@ -8,14 +8,14 @@ const program = new Command();
 
 program
   .name('file-stats')
-  .description('Выводит статистику файлов в директории')
+  .description('Shows file stats in a directory')
   .version('1.0.0')
-  .argument('<dir>', 'Путь к директории')
-  .option('-l, --limit <number>', 'Количество самых больших файлов', '5')
+  .argument('<dir>', 'path to directory')
+  .option('-l, --limit <number>', 'The number of the largest files', '5')
   .action((dir, options) => {
     const limit = parseInt(options.limit);
     if (!fs.existsSync(dir)) {
-      console.error(`Ошибка: директория "${dir}" не найдена.`);
+      console.error(`Error: directory "${dir}" not found.`);
       process.exit(1);
     }
 
@@ -43,15 +43,15 @@ program
 
     walk(dir);
 
-    // Сортируем по размеру
+    
     filesWithSize.sort((a, b) => b.size - a.size);
 
-    console.log(`Статистика для: ${path.resolve(dir)}`);
-    console.log(`Папок: ${dirCount}`);
-    console.log(`Файлов: ${fileCount}`);
-    console.log(`Общий размер: ${(totalSize / 1024 / 1024).toFixed(2)} МБ`);
+    console.log(`Stats for: ${path.resolve(dir)}`);
+    console.log(`Folders: ${dirCount}`);
+    console.log(`Files: ${fileCount}`);
+    console.log(`Total size: ${(totalSize / 1024 / 1024).toFixed(2)} МБ`);
 
-    console.log(`\nТоп-${limit} самых больших файлов:`);
+    console.log(`\nТоп-${limit} largest files:`);
     filesWithSize.slice(0, limit).forEach((f, i) => {
       console.log(`${i + 1}. ${f.name} — ${(f.size / 1024 / 1024).toFixed(2)} МБ`);
     });
