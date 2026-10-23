@@ -1,7 +1,7 @@
 {
   "name": "file-stats",
   "version": "1.0.0",
-  "description": "Выводит статистику файлов в директории",
+  "description": "Shows file stats in a directory",
   "main": "index.js",
   "bin": {
     "file-stats": "./index.js"
